@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package main;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-gotag/tagger/tagger.proto";
+
+message Data {
+    bool boolValue = 1;
+
+    int64 int64Value = 2;
+
+    double doubleValue = 3;
+
+    string stringValue = 4;
+
+    google.protobuf.Timestamp timestampValue = 5 [(tagger.tags) = "bson:\"date\"" ];
+
+    google.protobuf.BoolValue boolWrappedValue = 6;
+
+    google.protobuf.Int64Value int64WrappedValue = 7;
+
+    google.protobuf.DoubleValue doubleWrappedValue = 8;
+
+    google.protobuf.StringValue stringWrappedValue = 9;
+}
