@@ -9,10 +9,8 @@ import (
 	"github.com/golang/protobuf/ptypes/wrappers"
 
 	"github.com/mongodb/mongo-go-driver/bson"
-	"github.com/mongodb/mongo-go-driver/bson/bsoncodec"
 	"github.com/mongodb/mongo-go-driver/mongo"
 	"github.com/mongodb/mongo-go-driver/mongo/options"
-	"github.com/mongodb/mongo-go-driver/x/mongo/driver/topology"
 
 	"github.com/amsokol/mongo-go-driver-protobuf"
 )
@@ -29,15 +27,6 @@ func main() {
 	client, err := mongo.NewClientWithOptions("mongodb+srv://USER:PASSWORD@SERVER/experiments",
 		&options.ClientOptions{
 			Registry: reg,
-			TopologyOptions: []topology.Option{
-				topology.WithServerOptions(func(opts ...topology.ServerOption) []topology.ServerOption {
-					return []topology.ServerOption{
-						topology.WithRegistry(func(r *bsoncodec.Registry) *bsoncodec.Registry {
-							return reg
-						}),
-					}
-				}),
-			},
 		})
 
 	if err != nil {
